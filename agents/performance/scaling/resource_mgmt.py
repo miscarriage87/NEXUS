@@ -227,7 +227,7 @@ class ResourceManager:
         
         # TODO: Implement resource limit application
         # This would involve:
-        # - Using cgroups for Linux systems
+        # - Using appropriate system mechanisms (e.g., cgroups on Linux, launchd on macOS)
         # - Docker container limits
         # - Process priority adjustments
         # - systemd service limits

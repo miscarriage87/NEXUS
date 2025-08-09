@@ -7,17 +7,19 @@ import aiohttp
 import asyncio
 import yaml
 from typing import Dict, Any, List, Optional
+from pathlib import Path
 
 class OllamaClient:
     def __init__(self, base_url: str = "http://localhost:11434"):
         self.base_url = base_url
         self.session = None
         self.config = self._load_config()
-    
+
     def _load_config(self):
         """Load configuration from YAML file"""
         try:
-            with open('/home/ubuntu/nexus_config.yaml', 'r') as f:
+            config_path = Path(__file__).resolve().parent.parent / 'nexus_config.yaml'
+            with open(config_path, 'r') as f:
                 return yaml.safe_load(f)
         except Exception:
             return {}

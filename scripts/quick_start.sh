@@ -6,7 +6,7 @@ echo "=== NEXUS Mini-Agent-Swarm Quick Start ==="
 # Überprüfe Ollama Service
 if ! pgrep ollama > /dev/null; then
     echo "Starting Ollama service..."
-    nohup ollama serve > /home/ubuntu/ollama.log 2>&1 &
+    nohup ollama serve > "$HOME/ollama.log" 2>&1 &
     sleep 3
 fi
 
@@ -19,5 +19,5 @@ echo "Testing Ollama connection..."
 curl -s http://127.0.0.1:11434/api/tags | head -20
 
 echo "NEXUS infrastructure ready!"
-echo "Configuration: /home/ubuntu/nexus_config.yaml"
-echo "Logs: /home/ubuntu/nexus/logs/"
+echo "Configuration: $HOME/nexus_config.yaml"
+echo "Logs: $HOME/nexus/logs/"

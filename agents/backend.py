@@ -7,9 +7,12 @@ import json
 import os
 import sys
 from typing import Dict, Any, List
+from pathlib import Path
 
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 from core.base_agent import BaseAgent
 from core.ollama_client import ollama_client
@@ -36,7 +39,7 @@ class BackendAgent(BaseAgent):
         
         try:
             architecture = task.get("architecture", {})
-            output_dir = task.get("output_dir", "/home/ubuntu/nexus/demo")
+            output_dir = task.get("output_dir", str(BASE_DIR / "demo"))
             
             backend_tech = architecture.get("backend", "fastapi").lower()
             

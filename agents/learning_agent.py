@@ -22,6 +22,8 @@ import sys
 # Add parent directory to path for imports  
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 from core.base_agent import BaseAgent
 from core.messaging import MessageBus, Message, MessageType
 from core.ollama_client import ollama_client
@@ -71,7 +73,7 @@ class LearningAgent(BaseAgent):
         
         # Learning infrastructure
         self.knowledge_base_path = config.get('agents', {}).get('learning', {}).get(
-            'knowledge_base_path', '/home/ubuntu/nexus/knowledge'
+            'knowledge_base_path', str(BASE_DIR / 'knowledge')
         )
         self.setup_knowledge_base()
         

@@ -10,9 +10,12 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime
 import os
 import sys
+from pathlib import Path
 
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 from core.base_agent import BaseAgent
 from core.messaging import MessageBus, Message, MessageType, TaskRequest, ProjectPlan
@@ -215,7 +218,7 @@ class OrchestratorAgent(BaseAgent):
         self.logger.info(f"Starting execution of project: {project_id}")
         
         # Create output directory
-        demo_output = self.config.get('nexus', {}).get('demo_output', '/home/ubuntu/nexus/demo')
+        demo_output = self.config.get('nexus', {}).get('demo_output', str(BASE_DIR / 'demo'))
         output_dir = f"{demo_output}/{project_id}"
         os.makedirs(output_dir, exist_ok=True)
         
@@ -300,7 +303,7 @@ class OrchestratorAgent(BaseAgent):
 async def main():
     """Main function for testing orchestrator"""
     # Load config
-    with open('/home/ubuntu/nexus_config.yaml', 'r') as f:
+    with open(BASE_DIR / 'nexus_config.yaml', 'r') as f:
         config = yaml.safe_load(f)
     
     # Create orchestrator

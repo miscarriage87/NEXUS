@@ -1,7 +1,7 @@
 #!/bin/bash
 # NEXUS Performance Monitoring Script
 
-LOG_FILE="/home/ubuntu/nexus/logs/performance.log"
+LOG_FILE="$HOME/nexus/logs/performance.log"
 mkdir -p "$(dirname "$LOG_FILE")"
 
 echo "$(date): Starting NEXUS performance monitoring" >> "$LOG_FILE"

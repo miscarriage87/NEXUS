@@ -6,11 +6,14 @@ NEXUS Demo Script - Erstellt automatisch eine Demo-Web-App
 import asyncio
 import sys
 import os
+from pathlib import Path
 import yaml
 from datetime import datetime
 
 # Add current directory to path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+BASE_DIR = Path(__file__).resolve().parent
 
 from agents.orchestrator import OrchestratorAgent
 from agents.frontend import FrontendAgent
@@ -27,7 +30,7 @@ async def run_demo():
     try:
         # Konfiguration laden
         print("📋 Lade Konfiguration...")
-        with open('/home/ubuntu/nexus_config.yaml', 'r') as f:
+        with open(BASE_DIR / 'nexus_config.yaml', 'r') as f:
             config = yaml.safe_load(f)
         print("✅ Konfiguration geladen")
         
@@ -87,7 +90,7 @@ async def run_demo():
             print(f"📁 Projekt-ID: {project_id}")
             
             # Projekt-Details anzeigen
-            project_dir = f"/home/ubuntu/nexus/demo/{project_id}"
+            project_dir = BASE_DIR / 'demo' / project_id
             print(f"📂 Projekt-Verzeichnis: {project_dir}")
             
             # Dateien auflisten

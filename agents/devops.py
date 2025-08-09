@@ -14,6 +14,8 @@ import yaml
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 from core.base_agent import BaseAgent
 from core.ollama_client import ollama_client
 
@@ -62,7 +64,7 @@ class DevOpsAgent(BaseAgent):
         self.logger.info(f"Processing DevOps task: {task.get('title', 'Unknown')}")
         
         try:
-            output_dir = task.get("output_dir", "/home/ubuntu/nexus/demo")
+            output_dir = task.get("output_dir", str(BASE_DIR / "demo"))
             architecture = task.get("architecture", {})
             requirements = task.get("requirements", {})
             
@@ -2391,25 +2393,33 @@ output "public_subnets" {
   become: yes
   
   tasks:
-    - name: Add Docker GPG key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-    
-    - name: Add Docker repository
-      apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-        state: present
-    
-    - name: Install Docker
-      apt:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-          - docker-buildx-plugin
-          - docker-compose-plugin
-        state: present
+      - name: Add Docker GPG key (Debian)
+        apt_key:
+          url: https://download.docker.com/linux/ubuntu/gpg
+          state: present
+        when: ansible_os_family == "Debian"
+
+      - name: Add Docker repository (Debian)
+        apt_repository:
+          repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+          state: present
+        when: ansible_os_family == "Debian"
+
+      - name: Install Docker (Debian)
+        apt:
+          name:
+            - docker-ce
+            - docker-ce-cli
+            - containerd.io
+            - docker-buildx-plugin
+            - docker-compose-plugin
+          state: present
+        when: ansible_os_family == "Debian"
+
+      - name: Install Docker (macOS)
+        homebrew_cask:
+          name: docker
+        when: ansible_os_family == "Darwin"
     
     - name: Start and enable Docker
       systemd:

@@ -8,6 +8,7 @@ import asyncio
 from typing import Dict, Any, Optional
 import logging
 from datetime import datetime
+import platform
 
 
 class ResourceMonitor:
@@ -187,7 +188,7 @@ class ResourceMonitor:
             boot_time = psutil.boot_time()
             
             return {
-                'platform': psutil.LINUX if hasattr(psutil, 'LINUX') else 'unknown',
+                'platform': platform.system().lower(),
                 'boot_time': datetime.fromtimestamp(boot_time).isoformat(),
                 'cpu_count_physical': psutil.cpu_count(logical=False),
                 'cpu_count_logical': psutil.cpu_count(logical=True),

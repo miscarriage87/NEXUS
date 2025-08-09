@@ -13,6 +13,8 @@ from pathlib import Path
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 from core.base_agent import BaseAgent
 from core.ollama_client import ollama_client
 
@@ -47,7 +49,7 @@ class FrontendEnhancedAgent(BaseAgent):
         self.logger.info(f"Processing enhanced frontend task: {task.get('title', 'Unknown')}")
         
         try:
-            output_dir = task.get("output_dir", "/home/ubuntu/nexus/demo")
+            output_dir = task.get("output_dir", str(BASE_DIR / "demo"))
             architecture = task.get("architecture", {})
             requirements = task.get("requirements", {})
             

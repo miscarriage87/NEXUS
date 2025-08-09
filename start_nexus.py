@@ -6,12 +6,16 @@ NEXUS Startup Script - Startet das NEXUS Agent-System
 import asyncio
 import sys
 import os
+from pathlib import Path
 import yaml
 import argparse
 from datetime import datetime
 
 # Add current directory to path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# Projekt-Stammverzeichnis ermitteln
+BASE_DIR = Path(__file__).resolve().parent
 
 from agents.orchestrator import OrchestratorAgent
 from agents.frontend import FrontendAgent
@@ -70,18 +74,18 @@ async def check_system_health():
 async def load_config_with_fallback():
     """Lädt Konfiguration mit Fallback-Mechanismus"""
     config_paths = [
-        "/home/ubuntu/nexus_config.yaml",
-        "./config/nexus_config.yaml", 
-        "./config/agent_templates.json",
-        "./nexus_config.yaml"
+        BASE_DIR / "nexus_config.yaml",
+        BASE_DIR / "config" / "nexus_config.yaml",
+        BASE_DIR / "config" / "agent_templates.json",
+        Path("./nexus_config.yaml")
     ]
     
     # Versuche verschiedene Konfigurationspfade
     for config_path in config_paths:
         try:
-            if os.path.exists(config_path):
+            if config_path.exists():
                 print(f"📋 Lade Konfiguration: {config_path}")
-                if config_path.endswith('.json'):
+                if config_path.suffix == '.json':
                     import json
                     with open(config_path, 'r') as f:
                         return json.load(f)
@@ -207,7 +211,8 @@ async def create_todo_app(orchestrator):
         project_id = result["project_id"]
         print(f"✅ Todo-App erfolgreich erstellt!")
         print(f"📁 Projekt-ID: {project_id}")
-        print(f"📂 Verzeichnis: /home/ubuntu/nexus/demo/{project_id}")
+        project_dir = BASE_DIR / "demo" / project_id
+        print(f"📂 Verzeichnis: {project_dir}")
         print_startup_instructions(project_id)
     else:
         print(f"❌ Fehler: {result.get('message', 'Unbekannt')}")
@@ -232,7 +237,8 @@ async def create_blog(orchestrator):
         project_id = result["project_id"]
         print(f"✅ Blog erfolgreich erstellt!")
         print(f"📁 Projekt-ID: {project_id}")
-        print(f"📂 Verzeichnis: /home/ubuntu/nexus/demo/{project_id}")
+        project_dir = BASE_DIR / "demo" / project_id
+        print(f"📂 Verzeichnis: {project_dir}")
         print_startup_instructions(project_id)
     else:
         print(f"❌ Fehler: {result.get('message', 'Unbekannt')}")
@@ -275,14 +281,15 @@ async def create_custom_project(orchestrator):
         project_id = result["project_id"]
         print(f"✅ Projekt '{name}' erfolgreich erstellt!")
         print(f"📁 Projekt-ID: {project_id}")
-        print(f"📂 Verzeichnis: /home/ubuntu/nexus/demo/{project_id}")
+        project_dir = BASE_DIR / "demo" / project_id
+        print(f"📂 Verzeichnis: {project_dir}")
         print_startup_instructions(project_id)
     else:
         print(f"❌ Fehler: {result.get('message', 'Unbekannt')}")
 
 def print_startup_instructions(project_id):
     """Zeigt Startup-Anweisungen für ein Projekt"""
-    project_dir = f"/home/ubuntu/nexus/demo/{project_id}"
+    project_dir = BASE_DIR / "demo" / project_id
     
     print(f"\n📋 Startup-Anweisungen:")
     print(f"Frontend starten:")

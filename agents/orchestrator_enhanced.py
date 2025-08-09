@@ -13,9 +13,12 @@ import sys
 import heapq
 from dataclasses import dataclass, field
 from enum import Enum
+from pathlib import Path
 
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 from core.base_agent import BaseAgent
 from core.messaging import MessageBus, Message, MessageType, TaskRequest, ProjectPlan
@@ -603,7 +606,7 @@ class EnhancedOrchestratorAgent(BaseAgent):
             # Execute task
             agent = self.agents[agent_id]
             
-            demo_output = self.config.get('nexus', {}).get('demo_output', '/home/ubuntu/nexus/demo')
+            demo_output = self.config.get('nexus', {}).get('demo_output', str(BASE_DIR / 'demo'))
             output_dir = f"{demo_output}/{project_id}"
             os.makedirs(output_dir, exist_ok=True)
             
