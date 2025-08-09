@@ -1,0 +1,124 @@
+{
+  "nexus_agent_templates": {
+    "coordinator": {
+      "name": "NEXUS Coordinator Agent",
+      "model": "qwen2.5-coder:32b-instruct-q4_K_M",
+      "role": "Task coordination and planning",
+      "system_prompt": "You are the NEXUS Coordinator Agent. Your role is to analyze complex coding tasks, break them down into manageable subtasks, and coordinate other agents (Coder, Reviewer, Tester) to complete the work efficiently. You excel at project planning, task delegation, and ensuring code quality standards.",
+      "capabilities": [
+        "Task decomposition",
+        "Agent coordination",
+        "Project planning",
+        "Quality assurance oversight",
+        "Resource allocation"
+      ],
+      "parameters": {
+        "temperature": 0.3,
+        "max_tokens": 4096,
+        "top_p": 0.9,
+        "context_window": 8192
+      }
+    },
+    
+    "coder": {
+      "name": "NEXUS Coder Agent", 
+      "model": "codellama:34b-instruct-q4_K_M",
+      "role": "Code generation and implementation",
+      "system_prompt": "You are the NEXUS Coder Agent. You specialize in writing high-quality, efficient, and well-documented code. You follow best practices, implement clean architecture patterns, and ensure code is maintainable and scalable. You work closely with the Coordinator to implement assigned tasks.",
+      "capabilities": [
+        "Code generation",
+        "Algorithm implementation", 
+        "API development",
+        "Database design",
+        "Framework integration",
+        "Documentation writing"
+      ],
+      "parameters": {
+        "temperature": 0.2,
+        "max_tokens": 6144,
+        "top_p": 0.85,
+        "context_window": 8192
+      }
+    },
+    
+    "reviewer": {
+      "name": "NEXUS Reviewer Agent",
+      "model": "deepseek-coder-v2:16b-lite-instruct-q4_K_M", 
+      "role": "Code review and optimization",
+      "system_prompt": "You are the NEXUS Reviewer Agent. Your expertise lies in code review, optimization, security analysis, and ensuring adherence to coding standards. You identify bugs, suggest improvements, and optimize performance. You provide constructive feedback to enhance code quality.",
+      "capabilities": [
+        "Code review",
+        "Security analysis",
+        "Performance optimization",
+        "Bug detection",
+        "Standards compliance",
+        "Refactoring suggestions"
+      ],
+      "parameters": {
+        "temperature": 0.1,
+        "max_tokens": 4096,
+        "top_p": 0.8,
+        "context_window": 8192
+      }
+    },
+    
+    "tester": {
+      "name": "NEXUS Tester Agent",
+      "model": "qwen2.5-coder:7b-instruct",
+      "role": "Testing and validation",
+      "system_prompt": "You are the NEXUS Tester Agent. You specialize in creating comprehensive test suites, writing unit tests, integration tests, and performing validation. You ensure code reliability, edge case handling, and maintain high test coverage.",
+      "capabilities": [
+        "Unit test creation",
+        "Integration testing",
+        "Test automation",
+        "Edge case identification",
+        "Performance testing",
+        "Validation scripts"
+      ],
+      "parameters": {
+        "temperature": 0.4,
+        "max_tokens": 3072,
+        "top_p": 0.9,
+        "context_window": 4096
+      }
+    }
+  },
+  
+  "communication_protocols": {
+    "task_flow": [
+      "Coordinator receives task",
+      "Coordinator analyzes and plans",
+      "Coordinator delegates to Coder",
+      "Coder implements solution",
+      "Reviewer analyzes code",
+      "Tester creates and runs tests",
+      "Coordinator validates completion"
+    ],
+    
+    "message_format": {
+      "sender": "agent_name",
+      "receiver": "target_agent",
+      "task_id": "unique_identifier",
+      "message_type": "request|response|update|error",
+      "content": "message_body",
+      "timestamp": "iso_datetime",
+      "priority": "high|medium|low"
+    }
+  },
+  
+  "performance_targets": {
+    "response_time": {
+      "coordinator": "< 5 seconds",
+      "coder": "< 15 seconds", 
+      "reviewer": "< 10 seconds",
+      "tester": "< 8 seconds"
+    },
+    
+    "quality_metrics": {
+      "code_coverage": "> 85%",
+      "bug_detection_rate": "> 90%",
+      "performance_optimization": "> 20% improvement",
+      "documentation_completeness": "> 95%"
+    }
+  }
+}
