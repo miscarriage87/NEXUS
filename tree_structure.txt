@@ -1,0 +1,184 @@
+.
+├── NEXUS_TASKS.md
+├── NEXUS_TASKS.pdf
+├── SUMMARY.md
+├── SUMMARY.pdf
+├── __init__.py
+├── agents
+│   ├── __init__.py
+│   ├── analyst
+│   │   └── agent.py
+│   ├── backend.py
+│   ├── backend_enhanced.py
+│   ├── coder
+│   ├── context
+│   │   ├── __init__.py
+│   │   ├── agent.py
+│   │   ├── analyzers
+│   │   │   ├── __init__.py
+│   │   │   ├── codebase.py
+│   │   │   └── dependency.py
+│   │   ├── chunkers
+│   │   │   ├── __init__.py
+│   │   │   ├── ast_based.py
+│   │   │   ├── dependency.py
+│   │   │   ├── semantic.py
+│   │   │   └── sliding_window.py
+│   │   └── memory
+│   │       ├── __init__.py
+│   │       ├── cache.py
+│   │       └── quota.py
+│   ├── coordinator
+│   ├── database
+│   │   └── agent.py
+│   ├── devops.py
+│   ├── frontend.py
+│   ├── frontend_enhanced.py
+│   ├── integration_agent.py
+│   ├── learning_agent.py
+│   ├── orchestrator.py
+│   ├── orchestrator_enhanced.py
+│   ├── performance
+│   │   ├── __init__.py
+│   │   ├── agent.py
+│   │   ├── monitoring
+│   │   │   ├── __init__.py
+│   │   │   ├── llm_stats.py
+│   │   │   ├── metrics.py
+│   │   │   └── resources.py
+│   │   ├── optimization
+│   │   │   ├── __init__.py
+│   │   │   ├── caching.py
+│   │   │   ├── load_balancer.py
+│   │   │   └── model_selector.py
+│   │   └── scaling
+│   │       ├── __init__.py
+│   │       ├── auto_scale.py
+│   │       └── resource_mgmt.py
+│   ├── qa
+│   │   ├── __init__.py
+│   │   ├── agent.py
+│   │   ├── metrics
+│   │   │   ├── __init__.py
+│   │   │   ├── quality.py
+│   │   │   ├── reporting.py
+│   │   │   └── trends.py
+│   │   ├── refactoring
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   │   ├── optimization.py
+│   │   │   └── patterns.py
+│   │   ├── review
+│   │   │   ├── __init__.py
+│   │   │   ├── code_reviewer.py
+│   │   │   ├── compliance.py
+│   │   │   └── suggestions.py
+│   │   └── testing
+│   │       ├── __init__.py
+│   │       ├── coverage.py
+│   │       ├── integration.py
+│   │       └── test_generator.py
+│   ├── reviewer
+│   ├── security_agent.py
+│   └── tester
+├── config
+│   └── agent_templates.json
+├── core
+│   ├── __init__.py
+│   ├── base_agent.py
+│   ├── messaging.py
+│   └── ollama_client.py
+├── demo
+│   ├── 134c777c-f608-438f-82e0-e569d3634da7
+│   │   ├── backend
+│   │   │   ├── README.md
+│   │   │   ├── database.py
+│   │   │   ├── main.py
+│   │   │   ├── models.py
+│   │   │   └── requirements.txt
+│   │   └── frontend
+│   │       ├── index.html
+│   │       ├── package.json
+│   │       ├── public
+│   │       │   └── index.html
+│   │       ├── script.js
+│   │       ├── src
+│   │       │   ├── App.css
+│   │       │   ├── App.js
+│   │       │   └── index.js
+│   │       └── style.css
+│   ├── 2598fd12-ed2d-4661-b6ba-74098664c60c
+│   │   ├── backend
+│   │   │   ├── README.md
+│   │   │   ├── database.py
+│   │   │   ├── main.py
+│   │   │   ├── models.py
+│   │   │   └── requirements.txt
+│   │   └── frontend
+│   │       ├── index.html
+│   │       ├── package.json
+│   │       ├── public
+│   │       │   └── index.html
+│   │       ├── script.js
+│   │       ├── src
+│   │       │   ├── App.css
+│   │       │   ├── App.js
+│   │       │   └── index.js
+│   │       └── style.css
+│   └── 8c6d68e8-79bf-4ad6-8d98-f34a315ad213
+│       ├── backend
+│       │   ├── README.md
+│       │   ├── database.py
+│       │   ├── main.py
+│       │   ├── models.py
+│       │   └── requirements.txt
+│       └── frontend
+│           ├── index.html
+│           ├── package.json
+│           ├── public
+│           │   └── index.html
+│           ├── script.js
+│           ├── src
+│           │   ├── App.css
+│           │   ├── App.js
+│           │   └── index.js
+│           └── style.css
+├── docs
+│   ├── ARCHITECTURE.md
+│   ├── ARCHITECTURE.pdf
+│   ├── README.md
+│   ├── analyst_agent.md
+│   ├── analyst_agent.pdf
+│   ├── database_agent.md
+│   ├── database_agent.pdf
+│   ├── enhanced_orchestrator.md
+│   ├── enhanced_orchestrator.pdf
+│   ├── tasks_10-12_design.md
+│   ├── tasks_10-12_design.pdf
+│   ├── tasks_7-9_design.md
+│   └── tasks_7-9_design.pdf
+├── logs
+│   └── performance.log
+├── run_demo.py
+├── scripts
+│   ├── monitor_performance.sh
+│   └── quick_start.sh
+├── start_nexus.py
+├── tests
+│   ├── __init__.py
+│   ├── test_agents.py
+│   ├── test_analyst_agent.py
+│   ├── test_backend_enhanced.py
+│   ├── test_database_agent.py
+│   ├── test_devops.py
+│   ├── test_enhanced_orchestrator.py
+│   ├── test_frontend_enhanced.py
+│   ├── test_integration_agent.py
+│   ├── test_integration_enhanced.py
+│   ├── test_learning_agent.py
+│   ├── test_messaging.py
+│   ├── test_security_agent.py
+│   └── test_tasks_10_12_integration.py
+└── tree_structure.txt
+
+42 directories, 139 files

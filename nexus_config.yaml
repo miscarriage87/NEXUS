@@ -1,0 +1,38 @@
+# NEXUS System Configuration
+# Automatically generated configuration for NEXUS multi-agent system
+
+ollama:
+  base_url: "http://localhost:11434"
+  model: "codellama:7b"  # Primary model for general tasks
+  fallback_models: 
+    - "qwen2.5-coder:7b"   # Coding specialist
+    - "deepseek-coder:6.7b"  # Alternative coder
+    - "llama2"             # System fallback
+    - "mistral"            # System fallback
+
+agents:
+  max_retries: 3
+  timeout: 30
+  parallel_processing: true
+  
+demo:
+  output_dir: "./demo"
+  
+# Agent-specific model assignments (optional)
+agent_models:
+  coordinator: "qwen2.5-coder:7b"     # Best for planning and coordination
+  coder: "codellama:7b"               # Specialized for coding
+  reviewer: "deepseek-coder:6.7b"     # Good for code review
+  tester: "qwen2.5-coder:7b"          # Efficient for test generation
+
+# System settings
+system:
+  log_level: "INFO"
+  enable_async: true
+  max_concurrent_tasks: 5
+  
+# Performance tuning
+performance:
+  cache_enabled: true
+  parallel_agent_init: true
+  connection_pool_size: 10
